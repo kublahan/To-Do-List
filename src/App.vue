@@ -26,7 +26,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 
-// Тип для задачи
+
 interface Task {
   text: string;
   completed: boolean;
@@ -38,7 +38,7 @@ export default defineComponent({
     const newTask = ref<string>('');
     const tasks = ref<Task[]>([]);
 
-    // Загрузка задач из localStorage
+
     const loadTasks = (): void => {
       const savedTasks = localStorage.getItem('tasks');
       if (savedTasks) {
@@ -46,12 +46,12 @@ export default defineComponent({
       }
     };
 
-    // Сохранение задач в localStorage
+
     const saveTasks = (): void => {
       localStorage.setItem('tasks', JSON.stringify(tasks.value));
     };
 
-    // Добавление задачи
+
     const addTask = (): void => {
       if (newTask.value.trim() === '') return;
       tasks.value.push({ text: newTask.value, completed: false });
@@ -59,19 +59,19 @@ export default defineComponent({
       saveTasks();
     };
 
-    // Удаление задачи
+
     const removeTask = (index: number): void => {
       tasks.value.splice(index, 1);
       saveTasks();
     };
 
-    // Переключение статуса выполнения
+
     const toggleComplete = (index: number): void => {
       tasks.value[index].completed = !tasks.value[index].completed;
       saveTasks();
     };
 
-    // Загружаем задачи при монтировании компонента
+
     onMounted(() => {
       loadTasks();
     });
